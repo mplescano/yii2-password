@@ -1,24 +1,27 @@
 {
-    "name": "nordsoftware/yii2-password",
-    "description": "Password strategies for the Yii framework.",
-    "keywords": ["password", "bcrypt"],
-    "type": "yii-extension",
-    "license": "BSD-3-Clause",
-    "authors": [
-      {
-        "name": "Charles Pick",
-        "email": "charles.pick@gmail.com",
-        "homepage": "http://github.com/phpnode"
-      },
-      {
-        "name": "Christoffer Niska",
-        "email": "christoffer.niska@nordsoftware.com",
-        "homepage": "http://nordsoftware.com"
-      }
-    ],
-    "autoload": {
-        "psr-4": {
-            "phpnode\\yii\\password\\": ""
-        }
+  "name": "nordsoftware/yii2-password",
+  "description": "Password strategies for the Yii framework.",
+  "keywords": [
+    "password",
+    "bcrypt"
+  ],
+  "type": "yii-extension",
+  "license": "BSD-3-Clause",
+  "authors": [
+    {
+      "name": "Charles Pick",
+      "email": "charles.pick@gmail.com",
+      "homepage": "http://github.com/phpnode"
+    },
+    {
+      "name": "Christoffer Niska",
+      "email": "christoffer.niska@nordsoftware.com",
+      "homepage": "http://nordsoftware.com"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "phpnode\\yii\\password\\": ""
+    }
+  }
 }

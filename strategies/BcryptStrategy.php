@@ -10,6 +10,8 @@
 
 namespace phpnode\yii\password\strategies;
 
+use Yii;
+
 class BcryptStrategy extends PasswordStrategy
 {
     /**
@@ -40,21 +42,18 @@ class BcryptStrategy extends PasswordStrategy
      */
     protected function getRandomBytes($count = 16)
     {
-        // TODO Consider using RandomLib for generating the random bytes
-
-        $bytes = "";
-        if (function_exists("openssl_random_pseudo_bytes") && strtoupper(substr(PHP_OS, 0, 3)) !== "WIN") {
+        $bytes = '';
+        if (function_exists('openssl_random_pseudo_bytes') && strtoupper(substr(PHP_OS, 0, 3)) !== 'WIN') {
             $bytes = openssl_random_pseudo_bytes($count);
         } else if (
-            is_readable("/dev/urandom")
-            && ($handle = fopen("/dev/urandom", "rb")) !== false
+            is_readable('/dev/urandom')
+            && ($handle = fopen('/dev/urandom', 'rb')) !== false
         ) {
             $bytes = fread($handle, $count);
             fclose($handle);
         }
-
         if (strlen($bytes) < $count) {
-            $key = uniqid(\Yii::app()->name, true);
+            $key = uniqid(Yii::$app->name, true);
 
             // we need to pad with some pseudo random bytes
             while (strlen($bytes) < $count) {
