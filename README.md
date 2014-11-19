@@ -17,13 +17,13 @@ the legacy strategy, and if it matches, they will be seamlessly upgraded to the 
 strategy. For example:
 
 ```php
-class User extends CActiveRecord
+class User extends \yii\db\ActiveRecord
 {
-	public function behaviors()
-	{
-		return array(
-			"PasswordBehavior" => array(
-				"class" => "YiiPassword\Behavior",
+  public function behaviors()
+  {
+    return [
+      [
+					"class" => "YiiPassword\Behavior",
 				"defaultStrategyName" => "bcrypt",
 				"strategies" => array(
 					"bcrypt" => array(
