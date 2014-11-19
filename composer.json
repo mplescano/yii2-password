@@ -1,6 +1,6 @@
 {
-    "name": "phpnode/yiipassword",
-    "description": "Password strategies for the Yii PHP framework.",
+    "name": "nordsoftware/yii2-password",
+    "description": "Password strategies for the Yii framework.",
     "keywords": ["password", "bcrypt"],
     "type": "yii-extension",
     "license": "BSD-3-Clause",
@@ -12,13 +12,13 @@
       },
       {
         "name": "Christoffer Niska",
-        "email": "ChristofferNiska@gmail.com",
-        "homepage": "http://crisu83.me"
+        "email": "christoffer.niska@nordsoftware.com",
+        "homepage": "http://nordsoftware.com"
       }
     ],
     "autoload": {
-        "psr-0": {
-            "YiiPassword": "src"
+        "psr-4": {
+            "phpnode\\yii\\password\\": ""
         }
     }
 }
