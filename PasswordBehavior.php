@@ -88,6 +88,8 @@ class PasswordBehavior extends Behavior
      * @var string
      */
     private $_hashedPassword;
+    
+    public $domainValueYes = true;
 
     /**
      * @inheritdoc
@@ -125,7 +127,9 @@ class PasswordBehavior extends Behavior
         if ($this->autoUpgrade && $strategy->name != $this->defaultStrategy) {
             if (!$this->changePassword($password, !$strategy->canUpgradeTo($this->getDefaultStrategy()))) {
                 // couldn't upgrade their password, so ask them for a new password
-                $this->owner->updateAttributes([$this->requireNewPasswordAttribute => true]);
+                $this->owner->updateAttributes([
+                    $this->requireNewPasswordAttribute => $this->domainValueYes
+                ]);
             }
         }
         return true;
@@ -138,7 +142,7 @@ class PasswordBehavior extends Behavior
      * If validate false, return false, and {UserModel} hasError(password).
      * @return boolean true if the password was changed successfully
      */
-    public function changePassword($newPassword, $runValidation = true)
+    public function changePassword($newPassword, $runValidation = true, $updateAttributes = true)
     {
         if ($runValidation) {
             $this->owner->{$this->passwordAttribute} = $newPassword;
@@ -149,12 +153,14 @@ class PasswordBehavior extends Behavior
 
         $this->changePasswordInternal($newPassword);
 
-        // updateAttributes instead of save to avoid trigger afterSave / beforeSave
-        return $this->owner->updateAttributes(array(
-            $this->passwordAttribute,
-            $this->saltAttribute,
-            $this->strategyAttribute,
-        ));
+        if ($updateAttributes) {
+            // updateAttributes instead of save to avoid trigger afterSave / beforeSave
+            return $this->owner->updateAttributes(array(
+                    $this->passwordAttribute,
+                    $this->saltAttribute,
+                    $this->strategyAttribute,
+            ));
+        }
 
     }
 
