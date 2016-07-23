@@ -169,7 +169,7 @@ abstract class PasswordStrategy extends Validator
         Yii::$app->i18n->translations['phpnode/password/*'] = [
             'class' => $this->messageSource,
             'sourceLanguage' => 'en-US',
-            'basePath' => '@phpnode/yii/password/messages',
+            'basePath' => '@nordsoftware/yii2-password/messages',
         ];
     }
 
