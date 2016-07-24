@@ -19,24 +19,32 @@ strategy. For example:
 ```php
 class User extends \yii\db\ActiveRecord
 {
-  public function behaviors()
-  {
-    return [
-      [
-					"class" => "YiiPassword\Behavior",
-				"defaultStrategyName" => "bcrypt",
-				"strategies" => array(
-					"bcrypt" => array(
-						"class" => "YiiPassword\Strategies\Bcrypt",
-						"workFactor" => 14
-					),
-					"legacy" => array(
-						"class" => "YiiPassword\Strategies\LegacyMd5",
-					)
-				),
-			)
-		);
-	}
+    public function behaviors()
+    {
+        return array_merge(parent::behaviors(),
+            [
+                'APasswordBehavior' => [
+                    'class' => 'phpnode\yii\password\PasswordBehavior',
+                    'defaultStrategy' => 'bcrypt',
+                    "strategies" => array(
+                        "bcrypt" => array(
+                                "class" => "phpnode\yii\password\strategies\BcryptStrategy",
+                                "workFactor" => 14,
+                                "minLength" => 8,
+                                "minUpperCaseLetters" => 1,
+                                "minDigits" => 2,
+                        ),
+                    ),
+                    "usernameAttribute" => "no_usuario",
+                    "saltAttribute" => "va_seed",
+                    "passwordAttribute" => "no_clave",
+                    "strategyAttribute" => "co_encriptador",
+                    "requireNewPasswordAttribute" => "in_estado_usuario",
+                    "domainValueYes" => Constants::ID_DETDOM_ES_USUARIO_CLVEXP,
+                ],
+            ]
+        );
+    }
 
 	....
 }
